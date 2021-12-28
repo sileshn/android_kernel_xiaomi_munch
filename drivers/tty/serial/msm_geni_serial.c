@@ -3563,6 +3563,9 @@ static int msm_geni_serial_probe(struct platform_device *pdev)
 		INIT_WORK(&dev_port->work, msm_geni_serial_worker);
 	}
 
+	/* Set the flag to prevent to set up the console at runtime */
+	console_set_on_cmdline = 1;
+
 	ret = uart_add_one_port(drv, uport);
 	if (ret)
 		goto exit_workqueue_destroy;
